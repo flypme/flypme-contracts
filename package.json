@@ -1,0 +1,31 @@
+{
+  "name": "flyp-ico",
+  "version": "0.0.1",
+  "description": "Flyp ico",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flypme/flypme-contracts.git"
+  },
+  "keywords": [
+    "contracts",
+    "dex",
+    "exchange",
+    "accountless"
+  ],
+  "author": "Flypme Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flypme/flypme-contracts/issues"
+  },
+  "scripts": {
+    "merge": "sol-merger ./contracts/MySale.sol ./build/MySale.sol",
+    "compile": "node solc-compile.js build/MySale.sol"
+  },
+  "homepage": "https://flyp.me",
+  "devDependencies": {
+    "zeppelin-solidity": "^1.2.0"
+  }
+}

@@ -8,8 +8,8 @@ testrpc
 # PREPARE:
 
 ```sh
-git clone <path_to_server>/flyp-ico
-cd flyp-ico
+git clone https://github.com/flypme/flypme-contracts
+cd flypme-contracts
 npm install -g truffle
 # you might need the following to be able to compile dependencies
 export PYTHON=/usr/bin/python2.7

@@ -40,12 +40,8 @@ contract MySale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
   }
 
   // Allows generating tokens for externally funded participants (other blockchains)
-  function pregenTokens(address beneficiary, uint256 weiAmount, uint256 tokenAmount) onlyOwner {
-    // TODO: should specify tokens as well otherwise it won't be the right amounts
+  function pregenTokens(address beneficiary, uint256 weiAmount, uint256 tokenAmount) external onlyOwner {
     require(beneficiary != 0x0);
-
-    // calculate token amount to be created
-    // uint256 tokens = weiAmount.mul(rate);
 
     // update state
     weiRaised = weiRaised.add(weiAmount);

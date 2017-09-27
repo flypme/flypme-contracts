@@ -13,6 +13,7 @@ module.exports = function(deployer) {
   const softCap = new web3.BigNumber(web3.toWei(1, 'ether'));
   // secret hard cap 2.1 ether, key: 591563213198454323051378072341
   const hardCap = web3.toAscii('0x4e837d95b2a8be9939875a5556862b89ddd1bc80d5d97da9a65dd3b6367365aa')
+  const endBuffer = 70;
 
-  deployer.deploy(MySale, startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCap, tokenWallet)
+  deployer.deploy(MySale, startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCap, tokenWallet, endBuffer)
 };

@@ -16,13 +16,14 @@ contract MultiCappedCrowdsale is Crowdsale, Ownable {
   uint256 public hardCap = 0;
   bytes32 public hardCapHash;
   uint256 public hardCapBlock = 0;
-  uint256 public constant endBuffer = 70;
+  uint256 public endBuffer;
   event NotFinalized(bytes32 _a, bytes32 _b);
 
-  function MultiCappedCrowdsale(uint256 _softCap, bytes32 _hardCapHash) {
+  function MultiCappedCrowdsale(uint256 _softCap, bytes32 _hardCapHash, uint256 _endBuffer) {
     require(_softCap > 0);
     softCap = _softCap;
     hardCapHash = _hardCapHash;
+    endBuffer = _endBuffer;
   }
 
   //

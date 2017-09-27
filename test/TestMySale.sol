@@ -41,8 +41,9 @@ contract TestMySale {
     // secret hard cap 2.1 ether
     uint256 hardCap = 2100000000000000000;
     bytes32 hardCapHash = sha256(bytes32ToString(bytes32(hardCap)));
+    uint256 endBuffer = 70;
 
-    MySale meta = new MySale(startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCapHash, tokenWallet);
+    MySale meta = new MySale(startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCapHash, tokenWallet, endBuffer);
 
     contractBaseTests(meta);
     Assert.equal(meta.rate(), rate, "rate should be 0");

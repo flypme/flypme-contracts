@@ -27,8 +27,8 @@ contract MySale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
   uint256 public postHardRate;
   uint256 public presaleEndBlock;
 
-  function MySale(uint256 _startTime, uint256 _endTime, uint256 _presaleEndBlock, uint256 _rate, uint256 _rateDiff, uint256 _softCap, address _wallet, bytes32 _hardCapHash, address _tokenWallet)
-   MultiCappedCrowdsale(_softCap, _hardCapHash)
+  function MySale(uint256 _startTime, uint256 _endTime, uint256 _presaleEndBlock, uint256 _rate, uint256 _rateDiff, uint256 _softCap, address _wallet, bytes32 _hardCapHash, address _tokenWallet, uint256 _endBuffer)
+   MultiCappedCrowdsale(_softCap, _hardCapHash, _endBuffer)
    MyFinalizableCrowdsale(_tokenWallet)
    Crowdsale(_startTime, _endTime, _rate, _wallet)
   {

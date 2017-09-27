@@ -20,3 +20,5 @@ crowdsale.setHardCap(web3.toWei(2.1, 'ether'))
 crowdsale.finalize()
 
 tokInstance.transfer(account2, web3.toWei(1,'ether'), {from: account1})
+
+crowdsale.setHardCap2(web3.toWei(2.1), 9156321319845432351361).then(function(a){console.log(a.logs)})

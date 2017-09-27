@@ -11,8 +11,8 @@ module.exports = function(deployer) {
   const wallet = web3.eth.accounts[0] // the address that will hold the fund. Recommended to use a multisig one for security.
   const tokenWallet = web3.eth.accounts[5] // the address that will hold the final tokens
   const softCap = new web3.BigNumber(web3.toWei(1, 'ether'));
-  // secret hard cap 2.1 ether
-  const hardCap = web3.toAscii('0xb316befd43ac2f3c4d30fa8065777d9c13fd498da13bd5c2556bb48a5bccbce2');
+  // secret hard cap 2.1 ether, key: 591563213198454323051378072341
+  const hardCap = web3.toAscii('0x4e837d95b2a8be9939875a5556862b89ddd1bc80d5d97da9a65dd3b6367365aa')
 
   deployer.deploy(MySale, startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCap, tokenWallet)
 };

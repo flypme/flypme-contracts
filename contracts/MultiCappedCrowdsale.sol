@@ -59,14 +59,21 @@ contract MultiCappedCrowdsale is Crowdsale, Ownable {
     return sha256(bytes32ToString(bytes32(_hardCap)));
   }
 
-  function setHardCap(uint256 _hardCap) external onlyOwner {
-    if (hardCapHash != hashHardCap(_hardCap)) {
-      NotFinalized(hashHardCap(_hardCap), hardCapHash);
+ function hashHardCap(uint256 _hardCap, uint256 _key) internal constant returns (bytes32) {
+    return keccak256(_hardCap, _key);
+  }
+
+  function setHardCap(uint256 _hardCap, uint256 _key) external onlyOwner {
+    require(hardCap==0);
+    if (hardCapHash != hashHardCap(_hardCap, _key)) {
+      NotFinalized(hashHardCap(_hardCap, _key), hardCapHash);
       return;
     }
     hardCap = _hardCap;
     checkHardCap(weiRaised);
   }
+
+
 
   function checkHardCap(uint256 totalRaised) internal {
     if (hardCapBlock == 0 && totalRaised > hardCap) {

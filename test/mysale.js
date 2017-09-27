@@ -9,7 +9,9 @@ contract('MySale', function(accounts) {
     var instance = await MySale.deployed();
     initialEndBlock = await instance.endBlock();
 
-    instance.setHardCap(web3.toWei(6.0, 'ether'))
+    await instance.setHardCap(web3.toWei(6.0, 'ether'), '591563213198454323051378072341')
+    await instance.setHardCap(web3.toWei(2.1, 'ether'), '591563213198454323051378072340')
+    await instance.setHardCap(web3.toWei(2.1, 'ether'), '691563213198454323051378072341')
     var hardCap = await instance.hardCap()
 
     assert.equal(hardCap.valueOf(), 0, "hard cap was set")
@@ -25,7 +27,7 @@ contract('MySale', function(accounts) {
 
   it("should activate hardCap and not activate", async function() {
     var instance = await MySale.deployed();
-    instance.setHardCap(web3.toWei(2.1, 'ether'))
+    instance.setHardCap(web3.toWei(2.1, 'ether'), '591563213198454323051378072341')
     var endBlock = await instance.endBlock()
     assert.equal(endBlock.valueOf(), initialEndBlock.valueOf(), "final block was set")
   });

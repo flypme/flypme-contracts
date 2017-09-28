@@ -160,9 +160,9 @@ contract('MySale', function(accounts) {
     instance.finalize()
     balance = await tokInstance.balanceOf(targetAccount)
 
-    assert.equal(balance.valueOf(), 1.74e+21, 'destination doesnt have 1740 tokens');
+    assert.equal(balance.valueOf(), 2.4824e+21, 'destination doesnt have 2482.4 tokens');
     var totalSupply = await tokInstance.totalSupply()
-    assert.equal(totalSupply.toNumber(10), 7.54e+21, 'total supply is not 7540');
+    assert.equal(totalSupply.toNumber(10), 8.2824e+21, 'total supply is not 8282.4 tokens');
   });
 
   it("should not finalize again", async function() {
@@ -174,7 +174,7 @@ contract('MySale', function(accounts) {
     instance.finalize().then(function(){}, function(){});
     var balance = await tokInstance.balanceOf(targetAccount)
 
-    assert.equal(balance.valueOf(), 1.74e+21, 'destination doesnt have 1740 tokens');
+    assert.equal(balance.valueOf(), 2.4824e+21, 'destination doesnt have 2482.4 tokens');
   });
 
   it("should allow token transfers", async function() {

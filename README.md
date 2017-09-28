@@ -1,3 +1,9 @@
+# ABOUT
+
+Contracts for the [flyp.me](https://flyp.me) accountless exchange crowdsale.
+
+Deployed live at: https://etherscan.io/address/0x06dafc2a5fe47fcc9f37b5f91c0c2bd1cf2a9a4c
+
 # SETUP LOCAL TEST NODE:
 
 ```sh

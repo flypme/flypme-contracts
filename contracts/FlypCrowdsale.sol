@@ -1,10 +1,8 @@
 pragma solidity ^0.4.15;
 
 import "zeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-import "zeppelin-solidity/contracts/crowdsale/CappedCrowdsale.sol";
 import "zeppelin-solidity/contracts/token/MintableToken.sol";
 import "zeppelin-solidity/contracts/token/StandardToken.sol";
-// import "./InitialDistribution.sol";
 import "./MyFinalizableCrowdsale.sol";
 import "./MultiCappedCrowdsale.sol";
 import "./FypToken.sol";
@@ -36,7 +34,6 @@ contract FlypCrowdsale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
     postSoftRate = _rate-_rateDiff;
     postHardRate = _rate-(2*_rateDiff);
     presaleEndTime = _presaleEndTime;
-    // InitialDistribution.initialDistribution(token);
   }
 
   // Allows generating tokens for externally funded participants (other blockchains)

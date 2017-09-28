@@ -12,7 +12,8 @@ module.exports = function(deployer) {
   const tokenWallet = '0x6c1175d3ACe18431C3274a710E6662713340414a'
   const softCap = new web3.BigNumber(web3.toWei(15000, 'ether'));
   const hardCap = web3.toAscii('0x3c11d870f0fc097ed9a45ae2a08b6557f80822501686b7376fef5590f1527599')
+  const ownerAgent = '0x1C3A73709527d0B238467345cB6D0dd03a653215'
   const endBuffer = 21000;
 
-  deployer.deploy(MySale, startTime, endTime, presaleEndTime, rate, rateDiff, softCap, wallet, hardCap, tokenWallet, endBuffer)
+  deployer.deploy(MySale, startTime, endTime, presaleEndTime, rate, rateDiff, softCap, wallet, hardCap, tokenWallet, endBuffer, {from: ownerAgent})
 };

@@ -10,6 +10,7 @@ import 'zeppelin-solidity/contracts/crowdsale/FinalizableCrowdsale.sol';
  * after finishing. By default, it will end token minting.
  */
 contract MyFinalizableCrowdsale is FinalizableCrowdsale {
+  using SafeMath for uint256;
   // address where funds are collected
   address public tokenWallet;
 

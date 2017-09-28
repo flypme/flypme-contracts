@@ -25,9 +25,9 @@ contract MySale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
   uint256 public presaleRate;
   uint256 public postSoftRate;
   uint256 public postHardRate;
-  uint256 public presaleEndBlock;
+  uint256 public presaleEndTime;
 
-  function MySale(uint256 _startTime, uint256 _endTime, uint256 _presaleEndBlock, uint256 _rate, uint256 _rateDiff, uint256 _softCap, address _wallet, bytes32 _hardCapHash, address _tokenWallet, uint256 _endBuffer)
+  function MySale(uint256 _startTime, uint256 _endTime, uint256 _presaleEndTime, uint256 _rate, uint256 _rateDiff, uint256 _softCap, address _wallet, bytes32 _hardCapHash, address _tokenWallet, uint256 _endBuffer)
    MultiCappedCrowdsale(_softCap, _hardCapHash, _endBuffer)
    MyFinalizableCrowdsale(_tokenWallet)
    Crowdsale(_startTime, _endTime, _rate, _wallet)
@@ -35,7 +35,7 @@ contract MySale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
     presaleRate = _rate+_rateDiff;
     postSoftRate = _rate-_rateDiff;
     postHardRate = _rate-(2*_rateDiff);
-    presaleEndBlock = _presaleEndBlock;
+    presaleEndTime = _presaleEndTime;
     // InitialDistribution.initialDistribution(token);
   }
 
@@ -51,14 +51,14 @@ contract MySale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
   }
 
   // Overrides Crowdsale function
-  function buyTokens(address beneficiary) payable {
+  function buyTokens(address beneficiary) public payable {
     require(beneficiary != 0x0);
     require(validPurchase());
 
     uint256 weiAmount = msg.value;
 
     uint256 currentRate = rate;
-    if (block.number < presaleEndBlock) {
+    if (block.timestamp < presaleEndTime) {
         currentRate = presaleRate;
     }
     else if (hardCap > 0 && weiRaised > hardCap) {
@@ -93,6 +93,7 @@ contract MySale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
     } else {
       generateFinalTokens(30);
     }
+    token.finishMinting();
     super.finalization();
   }
 

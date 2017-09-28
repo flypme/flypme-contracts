@@ -15,7 +15,7 @@ contract MultiCappedCrowdsale is Crowdsale, Ownable {
   uint256 public softCap;
   uint256 public hardCap = 0;
   bytes32 public hardCapHash;
-  uint256 public hardCapBlock = 0;
+  uint256 public hardCapTime = 0;
   uint256 public endBuffer;
   event NotFinalized(bytes32 _a, bytes32 _b);
 
@@ -77,9 +77,9 @@ contract MultiCappedCrowdsale is Crowdsale, Ownable {
 
 
   function checkHardCap(uint256 totalRaised) internal {
-    if (hardCapBlock == 0 && totalRaised > hardCap) {
-      hardCapBlock = block.number;
-      endBlock = block.number+endBuffer;
+    if (hardCapTime == 0 && totalRaised > hardCap) {
+      hardCapTime = block.timestamp;
+      endTime = block.timestamp+endBuffer;
     }
   }
 

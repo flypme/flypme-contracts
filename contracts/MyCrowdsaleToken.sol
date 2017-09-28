@@ -17,14 +17,14 @@ contract MyCrowdsaleToken is MintableToken, LimitedTransferToken {
      isTransferable = true;
   }
 
-  function transferableTokens(address holder, uint64 time) constant public returns (uint256) {
+  function transferableTokens(address holder, uint64 time) public constant returns (uint256) {
     if (!isTransferable) {
         return 0;
     }
     return super.transferableTokens(holder, time);
   }
 
-  function finishMinting() onlyOwner returns (bool) {
+  function finishMinting() onlyOwner public returns (bool) {
      enableTransfers();
      return super.finishMinting();
   }

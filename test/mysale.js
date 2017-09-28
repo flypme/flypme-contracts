@@ -1,13 +1,13 @@
 var MySale = artifacts.require("./MySale.sol");
 var MyCrowdsaleToken = artifacts.require("./MyCrowdsaleToken.sol");
 
-var waitForBlock = require("./helpers/waitForBlock");
+var waitForTime = require("./helpers/waitForTime");
 
 contract('MySale', function(accounts) {
-  var initialEndBlock
+  var initialEndTime
   it("should not activate hardCap", async function() {
     var instance = await MySale.deployed();
-    initialEndBlock = await instance.endBlock();
+    initialEndTime = await instance.endTime();
 
     await instance.setHardCap(web3.toWei(6.0, 'ether'), '591563213198454323051378072341')
     await instance.setHardCap(web3.toWei(2.1, 'ether'), '591563213198454323051378072340')
@@ -19,17 +19,18 @@ contract('MySale', function(accounts) {
 
   it("will wait 40 blocks for presale end (please wait)", async function() {
     var instance = await MySale.deployed();
-    var targetBlock = web3.eth.blockNumber+41;
+    var startTime = await instance.startTime();
+    var targetTime = web3.eth.getBlock(web3.eth.blockNumber).timestamp+1230;
     console.log("    ...advancing blocks, please wait...")
-    await waitForBlock(targetBlock);
-    assert.equal(targetBlock, web3.eth.blockNumber, "Blocks not elapsed");
+    await waitForTime(targetTime);
+    assert.equal((targetTime/10).toFixed(), (web3.eth.getBlock('latest').timestamp/10).toFixed(), "Times not elapsed");
   });
 
   it("should activate hardCap and not activate", async function() {
     var instance = await MySale.deployed();
     instance.setHardCap(web3.toWei(2.1, 'ether'), '591563213198454323051378072341')
-    var endBlock = await instance.endBlock()
-    assert.equal(endBlock.valueOf(), initialEndBlock.valueOf(), "final block was set")
+    var endTime = await instance.endTime()
+    assert.equal(endTime.valueOf(), initialEndTime.valueOf(), "final block was set")
   });
 
   it("should allow token pregeneration", async function() {
@@ -99,9 +100,9 @@ contract('MySale', function(accounts) {
 
   it("should have activated hardCap", async function() {
     var instance = await MySale.deployed();
-    var endBlock = await instance.endBlock()
+    var endTime = await instance.endTime()
 
-    assert.notEqual(endBlock.toNumber(10), initialEndBlock.valueOf(), "hard cap was not activated")
+    assert.notEqual(endTime.toNumber(10), initialEndTime.valueOf(), "hard cap was not activated")
   });
 
   it("should assign 1200 to the fourth account (hard cap test)", async function() {
@@ -117,14 +118,14 @@ contract('MySale', function(accounts) {
     assert.equal(balance.valueOf(), 1.2e+21, "1200 wasn't in the fourth account");
   });
 
-  it("will wait 700 blocks (please wait)", async function() {
+  it("will wait 70 blocks (please wait)", async function() {
     var instance = await MySale.deployed();
-    var targetBlock = web3.eth.blockNumber+71;
+    var targetTime = web3.eth.getBlock('latest').timestamp+1420;
     console.log("    ...advancing blocks, please wait...")
 
-    await waitForBlock(targetBlock);
+    await waitForTime(targetTime);
 
-    assert.equal(targetBlock, web3.eth.blockNumber, "Blocks not elapsed");
+    assert.equal(targetTime+1, web3.eth.getBlock('latest').timestamp, "Times not elapsed");
   });
 
 

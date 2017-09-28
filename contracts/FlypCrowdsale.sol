@@ -84,11 +84,11 @@ contract FlypCrowdsale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
   // Overrides FinalizableCrowdsale function
   function finalization() internal {
     if (weiRaised < softCap) {
-      generateFinalTokens(50);
+      generateFinalTokens(1000);
     } else if (weiRaised < hardCap) {
-      generateFinalTokens(40);
+      generateFinalTokens(666);
     } else {
-      generateFinalTokens(30);
+      generateFinalTokens(428);
     }
     token.finishMinting();
     super.finalization();

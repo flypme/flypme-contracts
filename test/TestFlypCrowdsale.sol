@@ -2,10 +2,10 @@ pragma solidity ^0.4.15;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/MySale.sol";
+import "../contracts/FlypCrowdsale.sol";
 
 
-contract TestMySale {
+contract TestFlypCrowdsale {
   function bytes32ToString (bytes32 data) returns (string) {
     bytes memory bytesString = new bytes(32);
     for (uint j=0; j<32; j++) {
@@ -17,19 +17,19 @@ contract TestMySale {
     return string(bytesString);
   }
 
-  function contractBaseTests(MySale meta) {
-    Assert.equal(meta.hardCapBlock(), 0, "hardCapBlock should be 0");
+  function contractBaseTests(FlypCrowdsale meta) {
+    Assert.equal(meta.hardCapTime(), 0, "hardCapTime should be 0");
     Assert.equal(meta.hardCap(), 0, "hardCap should be 0");
     Assert.equal(meta.weiRaised(), 0, "weiRaised should be 0");
   }
 
   function testInitialBalanceUsingDeployedContract() {
-    MySale meta = MySale(DeployedAddresses.MySale());
+    FlypCrowdsale meta = FlypCrowdsale(DeployedAddresses.FlypCrowdsale());
 
     contractBaseTests(meta);
   }
 
-  function testInitialBalanceWithNewMySale() {
+  function testInitialBalanceWithNewFlypCrowdsale() {
     uint256 startBlock = block.number + 2;
     uint256 endBlock = block.number + 30000;
     uint256 presaleEndBlock = block.number + 30;
@@ -43,15 +43,15 @@ contract TestMySale {
     bytes32 hardCapHash = sha256(bytes32ToString(bytes32(hardCap)));
     uint256 endBuffer = 70;
 
-    MySale meta = new MySale(startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCapHash, tokenWallet, endBuffer);
+    FlypCrowdsale meta = new FlypCrowdsale(startBlock, endBlock, presaleEndBlock, rate, rateDiff, softCap, wallet, hardCapHash, tokenWallet, endBuffer);
 
     contractBaseTests(meta);
     Assert.equal(meta.rate(), rate, "rate should be 0");
-    Assert.equal(meta.presaleEndBlock(), presaleEndBlock, "presale end block should be properly set");
+    Assert.equal(meta.presaleEndTime(), presaleEndBlock, "presale end block should be properly set");
     Assert.equal(meta.postSoftRate(), 800, "finalRate should be properly set");
     Assert.equal(meta.postHardRate(), 600, "finalRate should be properly set");
-    Assert.equal(meta.startBlock(), startBlock, "startBlock should be properly set");
-    Assert.equal(meta.endBlock(), endBlock, "endBlock should be properly set");
+    Assert.equal(meta.startTime(), startBlock, "startBlock should be properly set");
+    Assert.equal(meta.endTime(), endBlock, "endBlock should be properly set");
     Assert.equal(meta.wallet(), wallet, "wallet should be properly set");
     Assert.equal(meta.tokenWallet(), tokenWallet, "tokenWallet should be properly set");
   }

@@ -1,9 +1,9 @@
-var MySale = artifacts.require("./MySale.sol");
-var MyCrowdsaleToken = artifacts.require("./MyCrowdsaleToken.sol");
+var MySale = artifacts.require("./FlypCrowdsale.sol");
+var MyCrowdsaleToken = artifacts.require("./FypToken.sol");
 
 var waitForTime = require("./helpers/waitForTime");
 
-contract('MySale', function(accounts) {
+contract('FlypCrowdsale', function(accounts) {
   var initialEndTime
   it("should not activate hardCap", async function() {
     var instance = await MySale.deployed();
@@ -58,7 +58,7 @@ contract('MySale', function(accounts) {
   });
 
 
-  it("should put 2000 MySale in the first account", async function() {
+  it("should put 2000 Tokens in the first account", async function() {
     var account1 = accounts[1]
     var instance = await MySale.deployed();
 

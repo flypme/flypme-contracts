@@ -4,12 +4,12 @@ import 'zeppelin-solidity/contracts/token/MintableToken.sol';
 import 'zeppelin-solidity/contracts/token/LimitedTransferToken.sol';
 
 /**
- * @title MyCrowdsaleToken
+ * @title FypToken
  */
-contract MyCrowdsaleToken is MintableToken, LimitedTransferToken {
+contract FypToken is MintableToken, LimitedTransferToken {
 
-  string public constant name = "Sample Crowdsale Token";
-  string public constant symbol = "SCT";
+  string public constant name = "Flyp.me Token";
+  string public constant symbol = "FYP";
   uint8 public constant decimals = 18;
   bool public isTransferable = false;
 

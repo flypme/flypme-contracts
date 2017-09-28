@@ -1,20 +1,18 @@
-const MySale = artifacts.require('MySale');
+const MySale = artifacts.require('FlypCrowdsale');
 const SafeMath = artifacts.require('zeppelin-solidity/contracts/math/SafeMath.sol');
-//const Crowdsale = artifacts.require('zeppelin-solidity/contracts/crowdsale/Crowdsale.sol');
 
 module.exports = function(deployer) {
   ts = web3.eth.getBlock(web3.eth.blockNumber).timestamp
-  const startTime = ts+120 // blockchain block number where the crowdsale will commence. Here I just taking the current block that the contract and setting that the crowdsale starts two block after
-  const presaleEndTime = ts + 1200 // blockchain block number where the crowdsale will commence. Here I just taking the current block that the contract and setting that the crowdsale starts two block after
-  const endTime = startTime + 900000  // blockchain block number where it will end. 300 is little over an hour.
-  const rate = new web3.BigNumber(1000) // inital rate of ether to tokens in wei
-  const rateDiff = new web3.BigNumber(200) // rate of ether to tokens in wei (after soft cap)
-  const wallet = web3.eth.accounts[0] // the address that will hold the fund. Recommended to use a multisig one for security.
-  const tokenWallet = web3.eth.accounts[5] // the address that will hold the final tokens
-  const softCap = new web3.BigNumber(web3.toWei(1, 'ether'));
-  // secret hard cap 2.1 ether, key: 591563213198454323051378072341
-  const hardCap = web3.toAscii('0x4e837d95b2a8be9939875a5556862b89ddd1bc80d5d97da9a65dd3b6367365aa')
-  const endBuffer = 70;
+  const startTime = ts+120
+  const presaleEndTime = 1506610800
+  const endTime = 1508598000
+  const rate = new web3.BigNumber(4400)
+  const rateDiff = new web3.BigNumber(200)
+  const wallet = '0x0DA05f94Fc49F82e0D89CFCA6B33CE2441aD0c0a'
+  const tokenWallet = '0x6c1175d3ACe18431C3274a710E6662713340414a'
+  const softCap = new web3.BigNumber(web3.toWei(15000, 'ether'));
+  const hardCap = web3.toAscii('0x3c11d870f0fc097ed9a45ae2a08b6557f80822501686b7376fef5590f1527599')
+  const endBuffer = 21000;
 
   deployer.deploy(MySale, startTime, endTime, presaleEndTime, rate, rateDiff, softCap, wallet, hardCap, tokenWallet, endBuffer)
 };

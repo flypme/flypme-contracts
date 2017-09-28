@@ -21,7 +21,7 @@ contract MyFinalizableCrowdsale is FinalizableCrowdsale {
 
   function generateFinalTokens(uint256 ratio) internal {
     uint256 finalValue = token.totalSupply();
-    finalValue = finalValue.mul(ratio).div(100);
+    finalValue = finalValue.mul(ratio).div(1000);
 
     token.mint(tokenWallet, finalValue);
     FinalTokens(finalValue);

@@ -43,24 +43,7 @@ contract MultiCappedCrowdsale is Crowdsale, Ownable {
   //  Hard cap logic
   //
 
-  // should be called after crowdsale ends, to do
-  // some extra finalization work
-  function bytes32ToString (bytes32 data) private returns (string) {
-    bytes memory bytesString = new bytes(32);
-    for (uint j=0; j<32; j++) {
-        byte char = byte(bytes32(uint(data) * 2 ** (8 * j)));
-        if (char != 0) {
-            bytesString[j] = char;
-        }
-    }
-    return string(bytesString);
-  }
-
-  function hashHardCap(uint256 _hardCap) internal constant returns (bytes32) {
-    return sha256(bytes32ToString(bytes32(_hardCap)));
-  }
-
- function hashHardCap(uint256 _hardCap, uint256 _key) internal constant returns (bytes32) {
+  function hashHardCap(uint256 _hardCap, uint256 _key) internal constant returns (bytes32) {
     return keccak256(_hardCap, _key);
   }
 

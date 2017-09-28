@@ -81,7 +81,7 @@ contract FlypCrowdsale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
     return new FypToken();
   }
 
-  // Overrides MyFinalizableSale function
+  // Overrides FinalizableCrowdsale function
   function finalization() internal {
     if (weiRaised < softCap) {
       generateFinalTokens(50);
@@ -94,7 +94,7 @@ contract FlypCrowdsale is MyFinalizableCrowdsale, MultiCappedCrowdsale {
     super.finalization();
   }
 
-  /* Make sure no eth funds become stuck on contract */
+  // Make sure no eth funds become stuck on contract
   function withdraw(uint256 weiValue) onlyOwner {
     wallet.transfer(weiValue);
   }
